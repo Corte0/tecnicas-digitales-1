@@ -8767,7 +8767,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "VCC_nreg"
+		(property "Value" "VCC"
 			(at 192.786 92.71 90)
 			(effects
 				(font
