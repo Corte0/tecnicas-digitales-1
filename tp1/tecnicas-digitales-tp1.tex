@@ -22,8 +22,30 @@
 \tableofcontents
 
 \chapter{Introducción}
+El presente trabajo práctico tiene como finalidad aplicar los conocimientos adquiridos en el estudio del álgebra de Boole
+y los circuitos combinacionales. A través de la resolución de problemas prácticos, se busca afianzar los conceptos teóricos abordados en
+clase mediante la implementación de circuitos lógicos utilizando el MiniLab, el cual proporcionará las distintas entradas para el circuito a implementar,
+y una interfaz para visualizar las salidas correspondientes.
+
+Durante el desarrollo del trabajo, se realizarán ejercicios que requieren la simplificación de funciones lógicas mediante distintos métodos
+de minimización, como la aplicación de teoremas del álgebra de Boole y el uso del mapa de Karnaugh. Estos métodos permitirán optimizar el
+diseño de circuitos digitales combinacionales, los cuales serán simulados para verificar
+su correcto funcionamiento y luego implementados con compuertas lógicas reales.
+
+Esta práctica no solo fortalece la comprensión de los fundamentos teóricos, sino que también promueve el desarrollo de habilidades prácticas
+esenciales en el campo de la electrónica digital, preparándonos para enfrentar futuros desafíos tanto académicos como profesionales.
+    
 
 \chapter{Conversor código BCD a XS3 (exceso 3)}
+Un conversor de código BCD a XS-3 es un circuito combinacional que convierte un número decimal representado en código BCD
+(Binary Coded Decimal) a su equivalente en código XS-3 (Exceso-3). El código BCD representa cada dígito decimal (de 0 a 9) con 4 bits,
+mientras que el código XS3 suma 3 (en binario) al valor BCD. Es decir:
+
+\begin{equation*}
+    BCD + 3 = XS3
+\end{equation*}
+
+Siguiendo esto, se obtiene la tabla de verdad.
 
     \section{Tabla de verdad}
 
@@ -54,7 +76,8 @@
     \end{table}
 
     \section{Funciones lógicas}
-
+    A partir de la tabla de verdad, se obtiene las correspondientes funciones como sumatoria de minitérminos.
+    
     \begin{equation*}
         Y_1 = \sum(5,6,7,8,9)
     \end{equation*}
@@ -129,8 +152,13 @@
       \end{minipage}
     \end{tabular}
 
-    \section{Implementación con compuertas}
+    Se ha minimizado las funciones de Boole mediante mapas de Karnaugh. Esto es útil ya que la función minimizada
+    es equivalente a la original extraída directamente de la tabla de verdad, pero con la ventaja de tener menos términos
+    y menos literales (en caso de ser posible).
 
+    \section{Implementación con compuertas}
+    Ahora, se implementarán las funciones minimizadas con compuertas lógicas. En nuestro caso utilizaremos compuertas AND, OR e inversores (NOT), ya que son las que están a nuestro alcance para poder implementar el circuito en una placa de pruebas (protoboard).
+    
     \begin{figure}[H]
       \centering
       \tikzset{
@@ -229,6 +257,20 @@
       \caption{Implementación con compuertas}
     \end{figure}
 
+    \section{Simulación}
+    Una vez armado el circuito a partir de las funciones miniminizadas, comprobaremos su correcto funcionamiento con un simulador en línea. Esto es muy útil ya que nos permite depurar posibles errores antes de implementarlo en la realidad, ahorrándonos mucho tiempo y proporcionándonos una forma práctica y eficiente de solucionar los problemas si los hubiere. En nuestro caso, utilizaremos el simulador en línea recomendado por las consignas del presente trabajo práctico: $Falstad$
+
+    Podemos confirmar que el circuito funciona correctamente al corroborar que para una combinación de bits en la entrada, se obtiene la correspondiente salida establecida por la tabla de verdad. 
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{pictures/simulacion-ej1.png}
+        \caption{Imagen de la simulación en la web Falstad.}
+        \label{fig:enter-label}
+    \end{figure}
+
+    \section{Implementación y verificación con Minilab}
+    Luego de verificar el correcto funcionamiento del circuito con un simulador, podemos proceder a implementar el mismo en una placa de pruebas. Luego, con la utilización del Minilab que hemos diseñado y construido, obtendremos las entradas necesarias para el circuito, y podremos visualizar conectados las salidas del mismo nuevamente al Minilab.
 
 \chapter{Comparador binario}
 
