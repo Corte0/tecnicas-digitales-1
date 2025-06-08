@@ -191,7 +191,7 @@
         \draw ($(B |- A1.input 1)$)  to[short, *-] (A1.input 1);
         \draw ($(NotC |- A1.input 2)$)  to[short, *-] (A1.input 2);
         \draw (A1.output) -- ++(0.3,0) |- (A2.input 1);
-        \draw ($(D |- A2.input 2)$)  to[short, *-] (A2.input 2);
+        \draw ($(NotD |- A2.input 2)$)  to[short, *-] (A2.input 2);
         \draw ($(NotB |- A3.input 1)$)  to[short, *-] (A3.input 1);
         \draw ($(D |- A3.input 2)$)  to[short, *-] (A3.input 2);
         \draw ($(NotB |- A4.input 1)$)  to[short, *-] (A4.input 1);
@@ -231,6 +231,152 @@
 
 
 \chapter{Comparador binario}
+
+    \section{Implementación con compuertas}
+
+    \begin{figure}[H]
+      \centering
+      \tikzset{
+      logic gate style/.style={scale=1.5, transform shape}
+      }
+      \begin{circuitikz}[circuit logic US]
+        \node at (0,0) [](A){A};
+        \node at (1,0) [](B){B};
+        \node at (2,0) [](C){C};
+        \node at (3,0) [](D){D};
+
+        \node[not gate, draw, scale=0.5, transform shape, rotate=-90] (NotA) at ($(A)+(0.5,-0.8)$) {};
+        \draw (A)  to[short] ++ (0,-17.5) coordinate (end);
+        \draw ($(A)+(0,-0.5)$)  -| (NotA.input);
+        \draw (NotA.output)  to[short] ($(NotA.output |- end)$);
+
+        \node[not gate, draw, scale=0.5, transform shape, rotate=-90] (NotB) at ($(B)+(0.5,-0.8)$) {};
+        \draw (B)  to[short] ($(B |- end)$);
+        \draw ($(B)+(0,-0.5)$)  -| (NotB.input);
+        \draw (NotB.output)  to[short] ($(NotB.output |- end)$);
+
+        \node[not gate, draw, scale=0.5, transform shape, rotate=-90] (NotC) at ($(C)+(0.5,-0.8)$) {};
+        \draw (C)  to[short] ($(C |- end)$);
+        \draw ($(C)+(0,-0.5)$)  -| (NotC.input);
+        \draw (NotC.output)  to[short] ($(NotC.output |- end)$);
+
+        \node[not gate, draw, scale=0.5, transform shape, rotate=-90] (NotD) at ($(D)+(0.5,-0.8)$) {};
+        \draw (D)  to[short] ($(D |- end)$);
+        \draw ($(D)+(0,-0.5)$)  -| (NotD.input);
+        \draw (NotD.output)  to[short] ($(NotD.output |- end)$);
+
+        % S1 ---------------------------------------------------------
+        \node[and gate] (A1) at (5,-2) {};
+        \node[and gate] (A2) at (5,-3) {};
+        \node[and gate] (A3) at (5,-4.5) {};
+        \node[and gate] (A4) at (6.5,-3.75) {};
+        \node[and gate] (A5) at (6.5,-5) {};
+        \node[or gate] (O1) at (8,-2.5) {};
+        \node[or gate] (O2) at (9.5,-3.5) {};
+
+        \draw ($(A |- A1.input 1)$)  to[short, *-] (A1.input 1);
+        \draw ($(NotC |- A1.input 2)$)  to[short, *-] (A1.input 2);
+        \draw ($(B |- A2.input 1)$)  to[short, *-] (A2.input 1);
+        \draw ($(NotC |- A2.input 2)$)  to[short, *-] (A2.input 2);
+        \draw ($(B |- A3.input 1)$)  to[short, *-] (A3.input 1);
+        \draw ($(C |- A3.input 2)$)  to[short, *-] (A3.input 2);
+        \draw (A2.output) -- ++(0.3,0) |- (A4.input 1);
+        \draw ($(NotD |- A4.input 2)$)  to[short, *-] (A4.input 2);
+        \draw (A3.output) -- ++(0.3,0) |- (A5.input 1);
+        \draw ($(NotD |- A5.input 2)$)  to[short, *-] (A5.input 2);
+        \draw (A1.output) -- ++(0.3,0) |- (O1.input 1);
+        \draw (A4.output) -- ++(0.3,0) |- (O1.input 2);
+        \draw (O1.output) -- ++(0.3,0) |- (O2.input 1);
+        \draw (A5.output) -- ++(1,0) |- (O2.input 2);
+
+        \node at ($(O2.output) + (3,0)$) [](S1){$S_1$};
+        \draw (O2.output) -- (S1) coordinate (salidas);
+
+        % S2 ---------------------------------------------------------
+        \node[and gate] (A1) at (5,-6) {};
+        \node[and gate] (A2) at (5,-7) {};
+        \node[and gate] (A3) at (5,-8.5) {};
+        \node[and gate] (A4) at (6.5,-7.75) {};
+        \node[and gate] (A5) at (6.5,-9) {};
+        \node[or gate] (O1) at (8,-6.5) {};
+        \node[or gate] (O2) at (9.5,-7.5) {};
+
+        \draw ($(NotA |- A1.input 1)$)  to[short, *-] (A1.input 1);
+        \draw ($(C |- A1.input 2)$)  to[short, *-] (A1.input 2);
+        \draw ($(NotA |- A2.input 1)$)  to[short, *-] (A2.input 1);
+        \draw ($(NotB |- A2.input 2)$)  to[short, *-] (A2.input 2);
+        \draw ($(NotB |- A3.input 1)$)  to[short, *-] (A3.input 1);
+        \draw ($(C |- A3.input 2)$)  to[short, *-] (A3.input 2);
+        \draw (A2.output) -- ++(0.3,0) |- (A4.input 1);
+        \draw ($(D |- A4.input 2)$)  to[short, *-] (A4.input 2);
+        \draw (A3.output) -- ++(0.3,0) |- (A5.input 1);
+        \draw ($(D |- A5.input 2)$)  to[short, *-] (A5.input 2);
+        \draw (A1.output) -- ++(0.3,0) |- (O1.input 1);
+        \draw (A4.output) -- ++(0.3,0) |- (O1.input 2);
+        \draw (O1.output) -- ++(0.3,0) |- (O2.input 1);
+        \draw (A5.output) -- ++(1,0) |- (O2.input 2);
+
+        \node at ($(O2.output) + (3,0)$) [](S2){$S_2$};
+        \draw (O2.output) -- (S2) coordinate (salidas);
+
+        % S3 ---------------------------------------------------------
+        \node[and gate] (A1) at (5,-10) {};
+        \node[and gate] (A2) at (6.5,-10.5) {};
+        \node[and gate] (A3) at (8,-11) {};
+        \node[and gate] (A4) at (5,-12) {};
+        \node[and gate] (A5) at (6.5,-12.5) {};
+        \node[and gate] (A6) at (8,-13) {};
+        \node[and gate] (A7) at (5,-14) {};
+        \node[and gate] (A8) at (6.5,-14.5) {};
+        \node[and gate] (A9) at (8,-15) {};
+        \node[and gate] (A10) at (5,-16) {};
+        \node[and gate] (A11) at (6.5,-16.5) {};
+        \node[and gate] (A12) at (8,-17) {};
+        \node[or gate] (O1) at (9.5,-12) {};
+        \node[or gate] (O2) at (9.5,-16) {};
+        \node[or gate] (O3) at (11,-14) {};
+
+        \draw ($(NotD |- A1.input 1)$)  to[short, *-] (A1.input 1);
+        \draw ($(NotC |- A1.input 2)$)  to[short, *-] (A1.input 2);
+        \draw (A1.output) -- ++(0.3,0) |- (A2.input 1);
+        \draw ($(NotB |- A2.input 2)$)  to[short, *-] (A2.input 2);
+        \draw (A2.output) -- ++(0.3,0) |- (A3.input 1);
+        \draw ($(NotA |- A3.input 2)$)  to[short, *-] (A3.input 2);
+
+        \draw ($(D |- A4.input 1)$)  to[short, *-] (A4.input 1);
+        \draw ($(NotC |- A4.input 2)$)  to[short, *-] (A4.input 2);
+        \draw (A4.output) -- ++(0.3,0) |- (A5.input 1);
+        \draw ($(B |- A5.input 2)$)  to[short, *-] (A5.input 2);
+        \draw (A5.output) -- ++(0.3,0) |- (A6.input 1);
+        \draw ($(NotA |- A6.input 2)$)  to[short, *-] (A6.input 2);
+
+        \draw ($(D |- A7.input 1)$)  to[short, *-] (A7.input 1);
+        \draw ($(C |- A7.input 2)$)  to[short, *-] (A7.input 2);
+        \draw (A7.output) -- ++(0.3,0) |- (A8.input 1);
+        \draw ($(B |- A8.input 2)$)  to[short, *-] (A8.input 2);
+        \draw (A8.output) -- ++(0.3,0) |- (A9.input 1);
+        \draw ($(A |- A9.input 2)$)  to[short, *-] (A9.input 2);
+
+        \draw ($(NotD |- A10.input 1)$)  to[short, *-] (A10.input 1);
+        \draw ($(C |- A10.input 2)$)  to[short, *-] (A10.input 2);
+        \draw (A10.output) -- ++(0.3,0) |- (A11.input 1);
+        \draw ($(NotB |- A11.input 2)$)  to[short, *-] (A11.input 2);
+        \draw (A11.output) -- ++(0.3,0) |- (A12.input 1);
+        \draw ($(A |- A12.input 2)$)  to[short, *-] (A12.input 2);
+
+        \draw (A3.output) -- ++(0.3,0) |- (O1.input 1);
+        \draw (A6.output) -- ++(0.3,0) |- (O1.input 2);
+        \draw (A9.output) -- ++(0.3,0) |- (O2.input 1);
+        \draw (A12.output) -- ++(0.3,0) |- (O2.input 2);
+        \draw (O1.output) -- ++(0.3,0) |- (O3.input 1);
+        \draw (O2.output) -- ++(0.3,0) |- (O3.input 2);
+
+        \node at ($(O3.output) + (1.5,0)$) [](S3){$S_3$};
+        \draw (O3.output) -- (S3) coordinate (salidas);
+
+      \end{circuitikz}
+      \caption{Implementación con compuertas}
+    \end{figure}
 
 \chapter{Conclusión}
 
