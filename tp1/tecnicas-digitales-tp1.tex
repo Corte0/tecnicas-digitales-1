@@ -14,7 +14,7 @@
 \materia{Técnicas digitales I}
 \titulo{Trabajo Practico N°1: Algebra de Boole y circuitos combinacionales}
 \comision{3R2}
-\autores{Ernst Pedro 000000\\ Cortesini Luciano 000000 \\ Prieto Angelo 401012}
+\autores{Ernst Pedro 400624\\ Cortesini Luciano 000000 \\ Prieto Angelo 401012}
 \fecha{12-06-2025}
 
 \begin{document}
@@ -274,7 +274,100 @@ Siguiendo esto, se obtiene la tabla de verdad.
 
 \chapter{Comparador binario}
 
-    \section{Implementación con compuertas}
+\section{Tabla de verdad}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{cccc|ccc}
+    $A_0$ & $A_1$ & $B_0$ & $B_1$ & $S_0$ & $S_1$ & $S_2$\\
+    \hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 1 & 0 & 1 & 0\\
+    0 & 0 & 1 & 0 & 0 & 1 & 0\\
+    0 & 0 & 1 & 1 & 0 & 1 & 0\\
+    0 & 1 & 0 & 0 & 1 & 0 & 0\\
+    0 & 1 & 0 & 1 & 0 & 0 & 1\\
+    0 & 1 & 1 & 0 & 0 & 1 & 0\\
+    0 & 1 & 1 & 1 & 0 & 1 & 0\\
+    1 & 0 & 0 & 0 & 1 & 0 & 0\\
+    1 & 0 & 0 & 1 & 1 & 0 & 0\\
+    1 & 0 & 1 & 0 & 0 & 0 & 1\\
+    1 & 0 & 1 & 1 & 0 & 1 & 0\\
+    1 & 1 & 0 & 0 & 1 & 0 & 0\\
+    1 & 1 & 0 & 1 & 1 & 0 & 0\\
+    1 & 1 & 1 & 0 & 1 & 0 & 0\\
+    1 & 1 & 1 & 1 & 0 & 0 & 1\\
+  \end{tabular}
+  \caption{Tabla de verdad del comparador binario}
+\end{table}
+
+\section{Obtener las funciones logicas de salidas con circuitos combinacionales}
+
+\begin{equation*}
+  S_0=\sum(4,8,9,12,13,14)
+\end{equation*}
+\begin{equation*}
+  S_1=\sum(1,2,3,6,7,11)
+\end{equation*}
+\begin{equation*}
+  S_2=\sum(0,5,10,15)
+\end{equation*}
+
+\section{Minimizar utilizando mapas de Karnaugh}
+
+\begin{center}
+% --- S0 ---
+\begin{minipage}{0.45\textwidth}
+  \centering
+  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+    \minterms{4,8,9,12,13,14}
+    \implicant{4}{12}
+    \implicantedge{12}{14}
+    \implicant{12}{9}
+  \end{karnaugh-map}
+  \vspace{0.5em}
+  $\displaystyle S_0 = A_0 \cdot \overline{B_0} + A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot A_1 \cdot \overline{B_1}$
+\end{minipage}
+\hfill
+% --- S1 ---
+\begin{minipage}{0.45\textwidth}
+  \centering
+  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+    \minterms{1,2,3,6,7,11}
+    \implicant{1}{3}
+    \implicantedge{3}{11}
+    \implicant{3}{6}
+  \end{karnaugh-map}
+  \vspace{0.5em}
+  $\displaystyle S_1 = \overline{A_0} \cdot B_0 + \overline{A_0} \cdot \overline{A_1} \cdot B_1 + \overline{A_1} \cdot B_0 \cdot B_1$
+\end{minipage}
+
+\vspace{1em}
+
+% --- S2 ---
+\begin{minipage}{0.45\textwidth}
+  \centering
+  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+    \minterms{0,5,10,15}
+    \implicant{0}{0}
+    \implicant{5}{5}
+    \implicant{10}{10}
+    \implicant{15}{15}
+  \end{karnaugh-map}
+  \vspace{0.5em}
+  $\displaystyle S_2 = A_0 \cdot \overline{B_0}$
+\end{minipage}
+\end{center}
+
+\section{Minimizar utilizando algebra de boole}
+
+De la tabla de verdad podemos tomar las funciones de salidas sin minimizar de esta forma:
+
+\begin{equation*}
+  S_0 = \overline{A_0} \cdot A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot \overline{A_1} \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot \overline{A_1} \cdot \overline{B_0} \cdot B_1 + A_0 \cdot A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot A_1 \cdot \overline{B_0} \cdot B_1 + A_0 \cdot A_1 \cdot B_0 \cdot \overline{B_1}
+\end{equation*}
+
+\section{Implementación con compuertas}
 
     \begin{figure}[H]
       \centering
@@ -420,6 +513,8 @@ Siguiendo esto, se obtiene la tabla de verdad.
       \caption{Implementación con compuertas}
     \end{figure}
 
-\chapter{Conclusión}
+
+
+\chapter{Conclusion}
 
 \end{document}
