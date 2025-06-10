@@ -275,6 +275,8 @@ Siguiendo esto, se obtiene la tabla de verdad.
 
 \chapter{Comparador binario}
 
+El comparador binario consta de tres salidas las cuales van a representar las tres distintas posibilidades de comparacion entre dos numeros de dos bits en las entradas. Las entradas se componenen de A y B, ambos de dos bits. La primer salida $S_0$ va a ser 1 cuando $A>B$, la segunda salida $S_1$ va a ser 1 cuando $A<B$ y por ultimo $S_2$ va a ser 1 cuando ambos numeros sean iguales. 
+
 \section{Tabla de verdad}
 
 \begin{table}[h]
@@ -353,17 +355,9 @@ Siguiendo esto, se obtiene la tabla de verdad.
             \implicant{10}{10}
         \end{karnaugh-map}
         \vspace{0.5em}
-        $\displaystyle S_2 = A_0 \cdot \overline{B_0}$
+        $\displaystyle S_2 = \overline{A_0} \cdot \overline{A_1} \cdot \overline{B_0} \cdot \overline{B_1} + \overline{A_0} \cdot A_1 \cdot \overline{B_0} \cdot B_1 + A_0 \cdot A_1 \cdot B_0 \cdot B_1 + A_0 \cdot \overline{A_1} \cdot B_0 \cdot \overline{B_1}$
       \end{minipage}
     \end{tabular}
-
-\section{Minimizar utilizando algebra de boole}
-
-De la tabla de verdad podemos tomar las funciones de salidas sin minimizar de esta forma:
-
-\begin{equation*}
-  S_0 = \overline{A_0} \cdot A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot \overline{A_1} \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot \overline{A_1} \cdot \overline{B_0} \cdot B_1 + A_0 \cdot A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot A_1 \cdot \overline{B_0} \cdot B_1 + A_0 \cdot A_1 \cdot B_0 \cdot \overline{B_1}
-\end{equation*}
 
 \section{Implementación con compuertas}
 
@@ -373,10 +367,10 @@ De la tabla de verdad podemos tomar las funciones de salidas sin minimizar de es
       logic gate style/.style={scale=1.5, transform shape}
       }
       \begin{circuitikz}[circuit logic US]
-        \node at (0,0) [](A){A};
-        \node at (1,0) [](B){B};
-        \node at (2,0) [](C){C};
-        \node at (3,0) [](D){D};
+        \node at (0,0) [](A){$A_0$};
+        \node at (1,0) [](B){$A_1$};
+        \node at (2,0) [](C){$B_0$};
+        \node at (3,0) [](D){$B_1$};
 
         \node[not gate, draw, scale=0.5, transform shape, rotate=-90] (NotA) at ($(A)+(0.5,-0.8)$) {};
         \draw (A)  to[short] ++ (0,-17.5) coordinate (end);
@@ -411,8 +405,8 @@ De la tabla de verdad podemos tomar las funciones de salidas sin minimizar de es
         \draw ($(NotC |- A1.input 2)$)  to[short, *-] (A1.input 2);
         \draw ($(B |- A2.input 1)$)  to[short, *-] (A2.input 1);
         \draw ($(NotC |- A2.input 2)$)  to[short, *-] (A2.input 2);
-        \draw ($(B |- A3.input 1)$)  to[short, *-] (A3.input 1);
-        \draw ($(C |- A3.input 2)$)  to[short, *-] (A3.input 2);
+        \draw ($(A |- A3.input 1)$)  to[short, *-] (A3.input 1);
+        \draw ($(B |- A3.input 2)$)  to[short, *-] (A3.input 2);
         \draw (A2.output) -- ++(0.3,0) |- (A4.input 1);
         \draw ($(NotD |- A4.input 2)$)  to[short, *-] (A4.input 2);
         \draw (A3.output) -- ++(0.3,0) |- (A5.input 1);
@@ -511,8 +505,27 @@ De la tabla de verdad podemos tomar las funciones de salidas sin minimizar de es
       \caption{Implementación con compuertas}
     \end{figure}
 
+\section{Armado de circuito y verificacion en el minilab}
 
+Una vez armado el circuito como indica en la imagen procedemos a verificarlo en el minilab.
+
+\section{Simulacion en falstad}
+
+Por ultimo se utiliza la herramienta falstad de la misma forma hecha anteriormente en el ejercicio 1.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\linewidth]{pictures/simulacion-ej2.png}
+  \caption{Imagen de la simulación en la web Falstad.}
+  \label{fig:enter-label}
+\end{figure}
 
 \chapter{Conclusion}
+
+En este trabajo práctico tuvimos la oportunidad de aplicar en profundidad los conceptos aprendidos sobre mapas de Karnaugh y circuitos combinacionales. A través del diseño de un conversor de BCD a Exceso-3 y un comparador binario, pudimos poner en práctica la simplificación de funciones lógicas, utilizando herramientas como el álgebra de Boole y los mapas de Karnaugh para optimizar las expresiones resultantes.
+
+Este proceso nos permitió reforzar el conocimiento teórico adquirido en clase, llevándolo a un plano más práctico. También nos familiarizamos con la implementación física de los circuitos diseñados, empleando simuladores digitales que facilitaron la verificación del correcto funcionamiento antes de pasar al montaje real.
+
+Uno de los aspectos más desafiantes de este trabajo fue el armado de los circuitos en la protoboard. La cantidad considerable de compuertas lógicas necesarias, junto con la complejidad de las interconexiones entre los distintos circuitos integrados, exige un trabajo meticuloso y organizado. Cualquier error de conexión puede provocar fallas difíciles de detectar si no se sigue un esquema claro y ordenado.
 
 \end{document}
