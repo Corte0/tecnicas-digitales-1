@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{circuitikz}
 \usetikzlibrary{circuits.logic.US}
+\usepackage{amsmath}
 
 \usepackage[label=corner]{karnaugh-map}
 
@@ -314,50 +315,47 @@ Siguiendo esto, se obtiene la tabla de verdad.
 \end{equation*}
 
 \section{Minimizar utilizando mapas de Karnaugh}
-
-\begin{center}
-% --- S0 ---
-\begin{minipage}{0.45\textwidth}
-  \centering
-  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
-    \minterms{4,8,9,12,13,14}
-    \implicant{4}{12}
-    \implicantedge{12}{14}
-    \implicant{12}{9}
-  \end{karnaugh-map}
-  \vspace{0.5em}
-  $\displaystyle S_0 = A_0 \cdot \overline{B_0} + A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot A_1 \cdot \overline{B_1}$
-\end{minipage}
-\hfill
-% --- S1 ---
-\begin{minipage}{0.45\textwidth}
-  \centering
-  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
-    \minterms{1,2,3,6,7,11}
-    \implicant{1}{3}
-    \implicantedge{3}{11}
-    \implicant{3}{6}
-  \end{karnaugh-map}
-  \vspace{0.5em}
-  $\displaystyle S_1 = \overline{A_0} \cdot B_0 + \overline{A_0} \cdot \overline{A_1} \cdot B_1 + \overline{A_1} \cdot B_0 \cdot B_1$
-\end{minipage}
-
-\vspace{1em}
-
-% --- S2 ---
-\begin{minipage}{0.45\textwidth}
-  \centering
-  \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
-    \minterms{0,5,10,15}
-    \implicant{0}{0}
-    \implicant{5}{5}
-    \implicant{10}{10}
-    \implicant{15}{15}
-  \end{karnaugh-map}
-  \vspace{0.5em}
-  $\displaystyle S_2 = A_0 \cdot \overline{B_0}$
-\end{minipage}
-\end{center}
+    \begin{tabular}{cc}
+      % Primer mapa
+      \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+            \minterms{4,8,9,12,13,14}
+            \implicant{12}{9}
+            \implicant{4}{12}
+            \implicantedge{12}{12}{14}{14}
+        \end{karnaugh-map}
+        \vspace{0.5em}
+        $\displaystyle S_0 = A_0 \cdot \overline{B_0} + A_1 \cdot \overline{B_0} \cdot \overline{B_1} + A_0 \cdot A_1 \cdot \overline{B_1}$
+      \end{minipage}
+      &
+      % Segundo mapa
+      \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+            \minterms{1,2,3,6,7,11}
+            \implicant{1}{3}
+            \implicant{3}{6}
+            \implicantedge{3}{3}{11}{11}
+        \end{karnaugh-map}
+        \vspace{0.5em}
+        $\displaystyle S_1 = \overline{A_0} \cdot B_0 + \overline{A_0} \cdot \overline{A_1} \cdot B_1 + \overline{A_1} \cdot B_0 \cdot B_1$
+      \end{minipage}
+      \\[1.5em]
+      % Tercer mapa
+      \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{karnaugh-map}[4][4][1][$B_1$][$B_0$][$A_1$][$A_0$]
+            \minterms{0,5,15,10}
+            \implicant{0}{0}
+            \implicant{5}{5}
+            \implicant{15}{15}
+            \implicant{10}{10}
+        \end{karnaugh-map}
+        \vspace{0.5em}
+        $\displaystyle S_2 = A_0 \cdot \overline{B_0}$
+      \end{minipage}
+    \end{tabular}
 
 \section{Minimizar utilizando algebra de boole}
 
