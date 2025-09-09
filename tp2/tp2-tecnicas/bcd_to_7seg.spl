@@ -1,0 +1,11 @@
+[Inputs]
+LT
+BL
+LE
+=BCD[3:0]=
+[Outputs]
+=display[7:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel bcd_to_7seg
+

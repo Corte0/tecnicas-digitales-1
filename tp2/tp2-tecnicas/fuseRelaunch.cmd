@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg_isim_beh.exe" -prj "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg_beh.prj" "work.bcd_to_7seg" "work.glbl" 

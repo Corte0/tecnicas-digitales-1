@@ -1,0 +1,13 @@
+
+
+
+// Instantiate the module
+bcd_to_7seg instance_name (
+    .BCD(BCD), 
+    .LT(LT), 
+    .BL(BL), 
+    .LE(LE), 
+    .display(display)
+    );
+
+

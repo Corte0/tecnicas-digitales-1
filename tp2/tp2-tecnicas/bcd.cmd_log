@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd.xst" -ofn "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd.syr" 

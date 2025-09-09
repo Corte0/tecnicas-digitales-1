@@ -1,0 +1,16 @@
+Running: /home/pedro/Opt/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg_isim_beh.exe -prj /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg_beh.prj work.bcd_to_7seg work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 12
+Turning on mult-threading, number of parallel sub-compilation jobs: 24 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd-to-7seg.v" into library work
+Analyzing Verilog file "/home/pedro/Opt/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 82608 KB
+Fuse CPU Usage: 910 ms
+Compiling module bcd_to_7seg
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+FATAL_ERROR:Simulator:Fuse.cpp:209:1.133 - Failed to compile one of the generated C files. Please recompile with -mt off -v 1 switch to identify which design unit failed.  For technical support on this issue, please visit http://www.xilinx.com/support.

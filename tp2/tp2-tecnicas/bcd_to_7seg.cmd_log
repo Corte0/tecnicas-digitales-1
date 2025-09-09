@@ -1,0 +1,6 @@
+xst -intstyle ise -ifn "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg.xst" -ofn "/home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg.syr" 
+netgen -intstyle ise -insert_glbl true -w -dir netgen/synthesis -ofmt verilog -sim bcd_to_7seg.ngc bcd_to_7seg_synthesis.v 
+vhdtdtfi -lib work /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd-to-7seg.v -lang verilog -prj tp2-tecnicas -o bcd_to_7seg.spl -module bcd_to_7seg -template /home/pedro/Opt/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 bcd_to_7seg.spl /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg.sym 
+vhdtdtfi -lang verilog -prj tp2-tecnicas -o /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas/bcd_to_7seg.tfi -lib work /home/pedro/Facultad/Tercero/Tecnicas/tecnicas-digitales-1/tp2/tp2-tecnicas//bcd-to-7seg.v -module bcd_to_7seg -template /home/pedro/Opt/14.7/ISE_DS/ISE//data/tfi.tft -deleteonerror 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc7a100t-csg324-3 bcd_to_7seg.ngc bcd_to_7seg.ngd  
