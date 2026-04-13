@@ -1,0 +1,142 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper, margin=2.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Informe sobre FPGA y CPLD}
+\author{Cortesini Perez Luciano Tomas}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\section{Introducción}
+Este informe analiza la diferencia entre FPGA y CPLD, define las siglas principales, menciona los
+fabricantes destacados y explica cómo se interpretan estos dispositivos a partir del material del
+\href{https://www.youtube.com/watch?v=trBiZkW6POk}{video propuesto}.
+
+\section{Definición y características de FPGA}
+Un \textbf{FPGA} es un dispositivo lógico programable que contiene bloques lógicos configurables (CLB),
+matrices de interconexión y puertos de E/S (GPIO).  
+Los FPGAs permiten implementar funciones digitales complejas y pueden ser reprogramados después de
+su fabricación. Generalmente ofrecen una gran cantidad de puertas lógicas, memoria interna y módulos
+especializados para aritmética y procesamiento de señales.
+
+\section{Siglas y significados}
+En el video se identifican las siguientes siglas:
+\begin{itemize}
+    \item \textbf{PAL}: Programmable Array Logic, una familia de dispositivos programables simples.
+    \item \textbf{PLA}: Programmable Logic Array, una matriz lógica más flexible que puede implementarse como combinaciones de puertas.
+    \item \textbf{CPLD}: Complex Programmable Logic Device.
+    \item \textbf{FPGA}: Field Programmable Gate Array.
+    \item \textbf{SSI}: Stacked Silicon Interconnect, tecnología de interconexión entre bloques de silicio.
+    \item \textbf{CLB}: Configurable Logic Block, el bloque básico de lógica en un FPGA.
+    \item \textbf{PLL}: Phase Locked Loop, circuito que genera señales de reloj estables y sincronizadas.
+    \item \textbf{MMCM}: Mixed Mode Clock Manager, unidad de manejo de relojes usada en FPGAs para generar y ajustar señales de reloj.
+    \item \textbf{GPIO}: General Purpose Input Output, pines de propósito general para entrada y salida digital.
+\end{itemize}
+
+\section{Fabricantes principales}
+Los fabricantes mencionados en el video son:
+\begin{itemize}
+    \item \textbf{Xilinx}.
+    \item \textbf{Altera}.
+\end{itemize}
+Xilinx y Altera son empresas clave en el mercado de la lógica programable. Xilinx es conocida por
+sus familias de FPGA y CPLD, y Altera, ahora parte de Intel, es reconocida por sus FPGAs y soluciones
+de diseño integrado.
+
+\section{Comparativa entre FPGA y CPLD}
+Un \textbf{FPGA} y un \textbf{CPLD} son dos tipos de dispositivos lógicos programables que se usan
+en distintos tipos de diseño, aunque comparten algunos principios.
+
+\subsection*{Diferencias principales}
+\begin{itemize}
+    \item Los FPGAs son más adecuados para diseños grandes y complejos, con gran cantidad de puertas lógicas, bloques de memoria y recursos especializados.
+    \item Los CPLDs suelen ser más compactos y están pensados para funciones de control, arranque y lógica de menor complejidad.
+    \item La mayoría de los CPLDs incluyen memoria de configuración no volátil en chip, por lo que pueden iniciar inmediatamente al energizar el sistema.
+    \item Los FPGAs, en cambio, suelen requerir cargar su configuración desde una memoria externa al arrancar, aunque tienen mayor capacidad interna.
+    \item La distinción principal entre las arquitecturas de dispositivos FPGA y CPLD es que los CPLD están basados internamente en una colección de PLD acompañados por una estructura de interconexión programable, mientras que los FPGA usan bloques lógicos.
+\end{itemize}
+
+\subsection*{Aspectos compartidos}
+\begin{itemize}
+    \item Ambos dispositivos permiten implementar lógica digital programable y se basan en elementos lógicos configurables.
+\end{itemize}
+
+\subsection*{Uso típico}
+\begin{itemize}
+    \item Un CPLD suele usarse para gestión de arranque, inicialización de buses o tareas que requieren disponibilidad inmediata al encender.
+    \item Un FPGA suele usarse para procesamiento digital complejo, aplicaciones de alto rendimiento y diseños que necesitan reconfiguración.
+\end{itemize}
+
+La diferencia más evidente entre un CPLD grande y un FPGA pequeño es la memoria no volátil del CPLD.  
+Esta característica permite utilizar al CPLD como un dispositivo de "boot loader", cargando la
+configuración de otros chips (como un FPGA) o inicializando señales críticas antes de que otros
+componentes estén listos.
+
+\section{Interpretación de estos dispositivos}
+Los dispositivos lógicos programables son chips electrónicos que permiten crear circuitos
+digitales de manera flexible. En lugar de tener una función fija grabada en el hardware, estos
+dispositivos se pueden programar para realizar diferentes tareas lógicas, como procesar señales,
+controlar motores o manejar datos.
+
+Estos dispositivos sirven para simplificar el desarrollo de sistemas electrónicos. Antes, diseñar
+un circuito personalizado requería fabricar un chip nuevo, lo que era costoso y lento. Con los
+dispositivos lógicos programables, los ingenieros pueden probar ideas rápidamente, cambiar la
+lógica sin alterar el hardware físico y reducir el tiempo de desarrollo. Se usan en una amplia
+variedad de aplicaciones, desde controles industriales hasta dispositivos de consumo, permitiendo
+innovaciones en tecnología sin grandes inversiones iniciales.
+
+\end{document}
